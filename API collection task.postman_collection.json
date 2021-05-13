@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "fe247a8a-c360-4b13-80aa-bee6e0efc542",
+		"name": "API collection task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Req1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var rjson = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function() {\r",
+							"  pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"pm.test(\"check for the name\", function () {\r",
+							"pm.expect(rjson.name).to.equal(pm.iterationData.get(\"value\"));\r",
+							"}); \r",
+							"pm.test(\"check for the age\", function () {\r",
+							"var rjson = pm.response.json();\r",
+							"if(rjson.age>Number(pm.environment.get(\"filterage\")))\r",
+							"{\r",
+							"}\r",
+							"else{console.log(\"The person is younger than 40\");\r",
+							"console.log(rjson);}\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}?{{key}}={{value}}",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "{{key}}",
+							"value": "{{value}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
